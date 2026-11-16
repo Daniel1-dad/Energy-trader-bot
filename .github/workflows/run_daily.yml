@@ -1,9 +1,11 @@
 yaml
+
 name: Ruleaza Alerte Energie Zilnic
 
 on:
   schedule:
-    - cron: '30 11 * * *' # Ora 13:30 ora României (11:30 UTC)
+    - cron: '30 11 * * *' # Ora 13:30 ora României
+  workflow_dispatch: # Aceasta permite pornirea manuală
 
 jobs:
   run-script:
