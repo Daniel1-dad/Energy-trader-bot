@@ -1,0 +1,27 @@
+yaml
+name: Ruleaza Alerte Energie Zilnic
+
+on:
+  schedule:
+    - cron: '30 11 * * *' # Ora 13:30 ora României (11:30 UTC)
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Preia codul
+        uses: actions/checkout@v3
+
+      - name: Instaleaza Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instaleaza bibliotecile necesare
+        run: pip install requests pandas streamlit
+
+      - name: Ruleaza scriptul de alerte
+        run: python script.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
